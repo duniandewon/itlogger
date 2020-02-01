@@ -1,4 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
+
+/** layout */
+import SearchBar from './component/layout/SearchBar';
+
+/** component */
+import Logs from './component/logs/Logs';
 
 /** Materialize CSS and JS */
 import 'materialize-css/dist/css/materialize.min.css';
@@ -11,7 +17,14 @@ const App = () => {
     /** Initialize materialize JS */
     M.AutoInit();
   }, []);
-  return <div className='App'>Hello React</div>;
+  return (
+    <Fragment>
+      <SearchBar />
+      <div className='container'>
+        <Logs />
+      </div>
+    </Fragment>
+  );
 };
 
 export default App;
