@@ -2,6 +2,7 @@ import React, { useEffect, Fragment } from 'react';
 
 /** layout */
 import SearchBar from './component/layout/SearchBar';
+import AddBtn from './component/layout/AddBtn';
 
 /** component */
 import Logs from './component/logs/Logs';
@@ -21,6 +22,7 @@ const App = () => {
     <Fragment>
       <SearchBar />
       <div className='container'>
+        <AddBtn />
         <Logs />
       </div>
     </Fragment>
