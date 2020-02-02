@@ -4,18 +4,31 @@ import React, { useState } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
 const AddLogModal = () => {
-  const [Message, setMessage] = useState('');
-  const [Tech, setTech] = useState('');
-  const [Attention, setAttention] = useState(false);
+  const [Logs, setLogs] = useState({
+    message: '',
+    tech: '',
+    attention: false
+  });
+
+  const { message, tech, attention } = Logs;
+
+  const handleChange = e =>
+    setLogs({ ...Logs, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
 
-    if (Message === '' || Tech === '') {
+    if (message === '' || tech === '') {
       M.toast({ html: 'Pleas enter a message and select a tech' });
     } else {
-      console.log(Message, Tech, Attention);
+      console.log(message, tech, attention);
     }
+
+    setLogs({
+      message: '',
+      tech: '',
+      attention: false
+    });
   };
 
   return (
@@ -26,8 +39,8 @@ const AddLogModal = () => {
           <div className='input-field'>
             <input
               name='message'
-              value={Message}
-              onChange={e => setMessage(e.target.value)}
+              value={message}
+              onChange={handleChange}
               type='text'
             />
             <label htmlFor='message' className='active'>
@@ -39,12 +52,12 @@ const AddLogModal = () => {
           <div className='input-field'>
             <select
               name='tech'
-              value={Tech}
+              value={tech}
               className='browser-default'
-              onChange={e => setTech(e.target.value)}
+              onChange={handleChange}
             >
               <option value='' disabled>
-                Select Technician
+                Select technician
               </option>
               <option value='John Doe'>John Doe</option>
               <option value='Sam Smith'>Sam Smith</option>
@@ -59,9 +72,9 @@ const AddLogModal = () => {
                 <input
                   type='checkbox'
                   className='filled-in'
-                  checked={Attention}
-                  value={Attention}
-                  onChange={e => setAttention(!Attention)}
+                  checked={attention}
+                  value={attention}
+                  onChange={e => setLogs({ ...Logs, attention: !attention })}
                 />
                 <span>Needs tttention</span>
               </label>
