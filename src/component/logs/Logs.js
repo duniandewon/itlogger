@@ -1,5 +1,11 @@
 import React, { useState, useEffect, Fragment } from 'react';
 
+/** Components */
+import LogItem from './LogItem';
+
+/** Layouts */
+import Preloader from '../layout/PreLoader';
+
 const Logs = () => {
   const [Logs, setLogs] = useState([]);
   const [Loading, setLoading] = useState(false);
@@ -18,18 +24,18 @@ const Logs = () => {
     //   eslint-disable-next-line
   }, []);
 
-  if (Loading) return <h4>Loading...</h4>;
+  if (Loading) return <Preloader />;
 
   return (
     <Fragment>
-      <ul className='collection-with-header'>
+      <ul className='collection with-header'>
         <li className='collection-header'>
           <h4 className='center'>System Logs</h4>
         </li>
         {!Loading && Logs.length === 0 ? (
           <p className='center'>No logs to show...</p>
         ) : (
-          Logs.map(log => <li>{log.message}</li>)
+          Logs.map(log => <LogItem log={log} key={log.id} />)
         )}
       </ul>
     </Fragment>
