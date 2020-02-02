@@ -6,6 +6,7 @@ import AddBtn from './component/layout/AddBtn';
 
 /** component */
 import Logs from './component/logs/Logs';
+import AddLogModal from './component/logs/AddLogModal';
 
 /** Materialize CSS and JS */
 import 'materialize-css/dist/css/materialize.min.css';
@@ -23,6 +24,7 @@ const App = () => {
       <SearchBar />
       <div className='container'>
         <AddBtn />
+        <AddLogModal />
         <Logs />
       </div>
     </Fragment>
