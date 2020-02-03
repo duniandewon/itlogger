@@ -1,4 +1,9 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+/** Actions */
+import { getLogs } from '../../actions/logActions';
 
 /** Components */
 import LogItem from './LogItem';
@@ -6,25 +11,13 @@ import LogItem from './LogItem';
 /** Layouts */
 import Preloader from '../layout/PreLoader';
 
-const Logs = () => {
-  const [Logs, setLogs] = useState([]);
-  const [Loading, setLoading] = useState(false);
-
-  const getLogs = async () => {
-    setLoading(true);
-    const res = await fetch('/logs');
-    const data = await res.json();
-
-    setLogs(data);
-    setLoading(false);
-  };
-
+const Logs = ({ log: { logs, loading }, getLogs }) => {
   useEffect(() => {
     getLogs();
     //   eslint-disable-next-line
   }, []);
 
-  if (Loading) return <Preloader />;
+  if (loading || logs === null) return <Preloader />;
 
   return (
     <Fragment>
@@ -32,14 +25,22 @@ const Logs = () => {
         <li className='collection-header'>
           <h4 className='center'>System Logs</h4>
         </li>
-        {!Loading && Logs.length === 0 ? (
+        {!loading && logs.length === 0 ? (
           <p className='center'>No logs to show...</p>
         ) : (
-          Logs.map(log => <LogItem log={log} key={log.id} />)
+          logs.map(log => <LogItem log={log} key={log.id} />)
         )}
       </ul>
     </Fragment>
   );
 };
 
-export default Logs;
+Logs.propTypes = {
+  log: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  log: state.log
+});
+
+export default connect(mapStateToProps, { getLogs })(Logs);
