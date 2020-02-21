@@ -6,13 +6,6 @@
       "tech": "Sarah Cornor",
       "attention": false,
       "date": "2020-02-21T09:44:35.350Z"
-    },
-    {
-      "message": "Test 2",
-      "attention": false,
-      "tech": "John Doe",
-      "date": "2020-02-21T03:24:42.450Z",
-      "id": 3
     }
   ],
   "techs": [
