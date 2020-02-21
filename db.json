@@ -2,10 +2,10 @@
   "logs": [
     {
       "id": 2,
-      "message": "Test Update action",
+      "message": "Test Update",
       "tech": "Sarah Cornor",
-      "attention": true,
-      "date": "2020-02-21T04:08:40.537Z"
+      "attention": false,
+      "date": "2020-02-21T09:44:35.350Z"
     },
     {
       "message": "Test 2",
