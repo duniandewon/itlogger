@@ -1,5 +1,20 @@
 {
-  "logs": [],
+  "logs": [
+    {
+      "id": 2,
+      "message": "Test Update action",
+      "tech": "Sarah Cornor",
+      "attention": true,
+      "date": "2020-02-21T04:08:40.537Z"
+    },
+    {
+      "message": "Test 2",
+      "attention": false,
+      "tech": "John Doe",
+      "date": "2020-02-21T03:24:42.450Z",
+      "id": 3
+    }
+  ],
   "techs": [
     {
       "id": 1,

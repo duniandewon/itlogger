@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+/**Actions */
+import { clearCurrent, updateLog } from '../../actions/logActions';
 
 /** Materialize CSS and JS */
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-const EditLogModal = () => {
+const EditLogModal = ({ current, clearCurrent, updateLog }) => {
   const [Logs, setLogs] = useState({
     message: '',
     tech: '',
@@ -21,8 +26,19 @@ const EditLogModal = () => {
     if (message === '' || tech === '') {
       M.toast({ html: 'Pleas enter a message and select a tech' });
     } else {
-      console.log(message, tech, attention);
+      const updLog = {
+        id: current.id,
+        message,
+        tech,
+        attention,
+        date: new Date()
+      };
+
+      updateLog(updLog);
+      M.toast({ html: `Log updated by ${tech}` });
     }
+
+    clearCurrent();
 
     setLogs({
       message: '',
@@ -30,6 +46,16 @@ const EditLogModal = () => {
       attention: false
     });
   };
+
+  useEffect(() => {
+    current
+      ? setLogs(current)
+      : setLogs({
+          message: '',
+          tech: '',
+          attention: false
+        });
+  }, [current]);
 
   return (
     <div id='edit-log-modal' className='modal' style={modalStyle}>
@@ -43,9 +69,6 @@ const EditLogModal = () => {
               onChange={handleChange}
               type='text'
             />
-            <label htmlFor='message' className='active'>
-              Log message
-            </label>
           </div>
         </div>
         <div className='row'>
@@ -100,4 +123,16 @@ const modalStyle = {
   height: '75%'
 };
 
-export default EditLogModal;
+EditLogModal.propTypes = {
+  current: PropTypes.object,
+  clearCurrent: PropTypes.func.isRequired,
+  updateLog: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  current: state.log.current
+});
+
+export default connect(mapStateToProps, { clearCurrent, updateLog })(
+  EditLogModal
+);
