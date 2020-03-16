@@ -1,13 +1,5 @@
 {
-  "logs": [
-    {
-      "id": 2,
-      "message": "Test Update",
-      "tech": "Sarah Cornor",
-      "attention": false,
-      "date": "2020-02-21T09:44:35.350Z"
-    }
-  ],
+  "logs": [],
   "techs": [
     {
       "id": 1,

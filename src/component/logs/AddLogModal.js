@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 /**Actions */
 import { addLogs } from '../../actions/logActions';
 
+/** Components */
+import TechsOptionSelect from '../techs/TechsOptionSelect';
+
 /** Materialize CSS and JS */
 import M from 'materialize-css/dist/js/materialize.min.js';
 
@@ -73,9 +76,7 @@ const AddLogModal = ({ addLogs }) => {
               <option value='' disabled>
                 Select technician
               </option>
-              <option value='John Doe'>John Doe</option>
-              <option value='Sam Smith'>Sam Smith</option>
-              <option value='Sarah Cornor'>Sarah Cornor</option>
+              <TechsOptionSelect />
             </select>
           </div>
         </div>
