@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+/** Actions */
+import { addTech } from '../../actions/techActions';
 
 /** Materialize CSS and JS */
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-const AddTechModal = () => {
+const AddTechModal = ({ addTech }) => {
   const [Techs, setTechs] = useState({
-    firsName: '',
+    firstName: '',
     lastName: ''
   });
 
-  const { firsName, lastName } = Techs;
+  const { firstName, lastName } = Techs;
 
   const handleChange = e =>
     setTechs({ ...Techs, [e.target.name]: e.target.value });
@@ -17,10 +22,10 @@ const AddTechModal = () => {
   const onSubmit = e => {
     e.preventDefault();
 
-    if (firsName === '' || lastName === '') {
+    if (firstName === '' || lastName === '') {
       M.toast({ html: 'Pleas enter the firs and last name' });
     } else {
-      console.log(firsName, lastName);
+      addTech(Techs);
     }
 
     setTechs({
@@ -36,8 +41,8 @@ const AddTechModal = () => {
         <div className='row'>
           <div className='input-field'>
             <input
-              name='firsName'
-              value={firsName}
+              name='firstName'
+              defaultValue={firstName}
               onChange={handleChange}
               type='text'
             />
@@ -73,4 +78,8 @@ const AddTechModal = () => {
   );
 };
 
-export default AddTechModal;
+AddTechModal.propTypes = {
+  addTech: PropTypes.func.isRequired
+};
+
+export default connect(null, { addTech })(AddTechModal);
